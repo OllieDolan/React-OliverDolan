@@ -1,42 +1,43 @@
 import React from 'react'
-function TableHeader() { ... }
 
-function TableBody(props) {
-  const rows = props.characterData.map((row, index) => {
+function TableHeader() {
     return (
-      <tr key={index}>
-        <td>{row.name}</td>         
-        <td>{row.job}</td>
-      </tr>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
     );
-   }
-  );
-  return (
-      <tbody>
-        {rows}
-       </tbody>
-   );
 }
 
+function TableBody(props) {
+    const rows = props.characterData.map((row, index) => {
+        return (
+            <tr key={index}>
+                <td>{row.name}</td>
+                <td>{row.job}</td>
+                <td>
+                    <button onClick={() => props.removeCharacter(index)}>Delete</button>
+                </td>
+            </tr>
+        );
+    });
+    return (
+        <tbody>
+            {rows}
+        </tbody>
+    );
+}
 
 function Table(props) {
     return (
-      <table>
-        <TableHeader />
-        <TableBody characterData={props.characterData} />
-      </table>
-    )
-  }
+        <table>
+            <TableHeader />
+            <TableBody characterData={props.characterData} removeCharacter={props.removeCharacter} />
+        </table>
+    );
 }
 
-function TableHeader()  {
-  return (
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Job</th>
-      </tr>
-    </thead>
-  );
-}
 export default Table;
